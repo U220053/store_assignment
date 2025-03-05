@@ -332,7 +332,122 @@ input[type="text"] {
 .order-actions {
   margin-top: 30px;
 }
+.admin-panel {
+  background-color: #f9f9fc;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+}
 
+.admin-panel section {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+  padding: 25px;
+  border: 1px solid #e9ecef;
+}
+
+.admin-panel h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #4a90e2;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background-color: #f4f6f7;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid #e6e9eb;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card h3 {
+  color: #7f8c8d;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.stat-card p {
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.discount-code-generator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generated-code-display {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #d1e7ff;
+}
+
+.generated-code-display strong {
+  color: #2980b9;
+  font-size: 1.1rem;
+}
+
+.discount-codes-table,
+.recent-orders-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 15px;
+}
+
+.discount-codes-table thead,
+.recent-orders-table thead {
+  background-color: #f8f9fa;
+}
+
+.discount-codes-table th,
+.recent-orders-table th {
+  padding: 12px;
+  text-align: left;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.discount-codes-table td,
+.recent-orders-table td {
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+  color: #2c3e50;
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 /* Responsive Styles */
 @media (max-width: 768px) {
   .checkout-container {
@@ -389,5 +504,17 @@ input[type="text"] {
   .error-message {
     color: #dc3545;
     margin: 10px 0;
+  }
+  .admin-panel {
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .discount-codes-table,
+  .recent-orders-table {
+    font-size: 0.9rem;
   }
 }

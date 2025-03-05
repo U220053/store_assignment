@@ -1,88 +1,3 @@
-// // app/checkout/page.js
-// "use client";
-
-// import { useState, useEffect } from "react";
-// import Checkout from "@/components/Checkout";
-// import { useRouter } from "next/navigation";
-
-// export default function CheckoutPage() {
-//   const [cart, setCart] = useState({ items: [], total: 0 });
-//   const [loading, setLoading] = useState(true);
-//   const router = useRouter();
-//   const [userId, setUserId] = useState(null);
-
-//   useEffect(() => {
-//     // Get userId from localStorage
-//     const storedUserId = localStorage.getItem("userId") || `user-${Date.now()}`;
-//     setUserId(storedUserId);
-
-//     if (storedUserId) {
-//       fetchCart(storedUserId);
-//     }
-//   }, []);
-
-//   const fetchCart = async (uid) => {
-//     try {
-//       setLoading(true);
-//       const response = await fetch("/api/cart", {
-//         headers: {
-//           "user-id": uid,
-//         },
-//       });
-//       const data = await response.json();
-//       setCart(data);
-//       setLoading(false);
-//     } catch (error) {
-//       console.error("Error fetching cart:", error);
-//       setLoading(false);
-//     }
-//   };
-
-//   const processCheckout = async (discountCode) => {
-//     try {
-//       const response = await fetch("/api/checkout", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           "user-id": userId,
-//         },
-//         body: JSON.stringify({ discountCode: discountCode.trim() || null }),
-//       });
-
-//       const data = await response.json();
-
-//       if (!response.ok) {
-//         throw new Error(data.error || "Checkout failed");
-//       }
-
-//       // Store order info in localStorage for the confirmation page
-//       localStorage.setItem(
-//         "orderConfirmation",
-//         JSON.stringify({
-//           order: data.order,
-//           message: data.message,
-//         })
-//       );
-
-//       // Navigate to confirmation page
-//       router.push("/order-confirmation");
-//     } catch (error) {
-//       console.error("Error during checkout:", error);
-//       return { error: error.message };
-//     }
-//   };
-
-//   if (loading) {
-//     return <div className="loading">Loading checkout...</div>;
-//   }
-
-//   return (
-//     <div className="container">
-//       <h1 className="page-title">Checkout</h1>
-//       <Checkout cart={cart} onCheckout={processCheckout} />
-//     </div>
-//   );
-// }
 "use client";
 
 import { useState, useEffect } from "react";
@@ -93,6 +8,7 @@ export default function CheckoutPage() {
   const [cart, setCart] = useState({ items: [], total: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [availableCoupons, setAvailableCoupons] = useState([]);
   const router = useRouter();
   const [userId, setUserId] = useState(null);
 
@@ -107,9 +23,22 @@ export default function CheckoutPage() {
 
       if (storedUserId) {
         fetchCart(storedUserId);
+        fetchAvailableCoupons();
       }
     }
   }, []);
+
+  const fetchAvailableCoupons = async () => {
+    try {
+      const response = await fetch("/api/discounts");
+      const data = await response.json();
+      if (data.discountCodes) {
+        setAvailableCoupons(data.discountCodes);
+      }
+    } catch (error) {
+      console.error("Error fetching discount codes:", error);
+    }
+  };
 
   const fetchCart = async (uid) => {
     try {
@@ -210,7 +139,23 @@ export default function CheckoutPage() {
   return (
     <div className="container">
       <h1 className="page-title">Checkout</h1>
-      <Checkout cart={cart} onCheckout={processCheckout} />
+      {availableCoupons.length > 0 && (
+        <div className="discount-coupons">
+          <h3>Available Discount Coupons:</h3>
+          <ul>
+            {availableCoupons.map((code, index) => (
+              <li key={index}>
+                Use code <strong>{code}</strong> for 10% off
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <Checkout
+        cart={cart}
+        onCheckout={processCheckout}
+        availableCoupons={availableCoupons}
+      />
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function OrderConfirmation({ orderData, onContinueShopping }) {
             <strong>Tax:</strong> ${order.tax.toFixed(2)}
           </p> */}
           <p>
-            <strong>Shipping:</strong> ${10}
+            <strong>Shipping:</strong> ${0}
           </p>
           <p>
             <strong>Total:</strong> ${order?.total?.toFixed(2)}

@@ -50,8 +50,16 @@ export default function Checkout({ cart, onCheckout, availableCoupons }) {
       <div className="checkout-form">
         <div className="cart-summary">
           {cart.items.map((item) => (
-            <div key={item.productId} className="cart-item">
-              <span>{item.productName}</span>
+            <div
+              key={item.productId}
+              className="cart-item"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "20px",
+              }}
+            >
+              <span>{item.productName} </span>
               <span>Quantity: {item.quantity}</span>
               <span>${item.subtotal.toFixed(2)}</span>
             </div>

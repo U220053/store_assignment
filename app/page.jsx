@@ -47,7 +47,17 @@ export default function Home() {
 
       // Optionally show a confirmation message
       // alert("Item added to cart!");
-      toast.success("Item added to cart!");
+      // toast.success("Item added to cart!");
+      toast.success("Item added!", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -59,6 +69,7 @@ export default function Home() {
 
   return (
     <div className="container">
+      <ToastContainer />
       <h1 className="page-title">Welcome to our Store</h1>
       <ProductList products={products} addToCart={addToCart} />
     </div>

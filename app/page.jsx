@@ -4,6 +4,8 @@
 import { useState, useEffect } from "react";
 import ProductList from "@/components/ProductList";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -44,7 +46,8 @@ export default function Home() {
       });
 
       // Optionally show a confirmation message
-      alert("Item added to cart!");
+      // alert("Item added to cart!");
+      toast.success("Item added to cart!");
     } catch (error) {
       console.error("Error adding to cart:", error);
     }

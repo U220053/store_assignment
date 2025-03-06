@@ -1,21 +1,5 @@
-// // app/api/checkout/route.js
-// import { NextResponse } from "next/server";
-// import storeOperations from "@/lib/store";
+// app/api/checkout/route.js
 
-// export async function POST(request) {
-//   try {
-//     const userId = request.headers.get("user-id") || "guest";
-//     const { discountCode } = await request.json();
-//     console.log(
-//       `User ${userId} is checking out with discount code: ${discountCode}`
-//     );
-//     const result = storeOperations.checkout(userId, discountCode);
-//     console.log(`Checkout result:`, result);
-//     return NextResponse.json(result);
-//   } catch (error) {
-//     return NextResponse.json({ error: error.message }, { status: 400 });
-//   }
-// }
 import { NextResponse } from "next/server";
 import storeOperations from "@/lib/store";
 

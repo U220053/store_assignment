@@ -1,26 +1,3 @@
-// // app/api/cart/add/route.js
-// import { NextResponse } from "next/server";
-// import storeOperations from "@/lib/store";
-
-// export async function POST(request) {
-//   try {
-//     const userId = request.headers.get("user-id") || "guest";
-//     const { productId, quantity = 1 } = await request.json();
-
-//     if (!productId) {
-//       return NextResponse.json(
-//         { error: "Product ID is required" },
-//         { status: 400 }
-//       );
-//     }
-
-//     const cart = storeOperations.addToCart(userId, productId, quantity);
-//     console.log("cart", cart);
-//     return NextResponse.json(cart);
-//   } catch (error) {
-//     return NextResponse.json({ error: error.message }, { status: 500 });
-//   }
-// }
 // app/api/cart/add/route.js
 import { NextResponse } from "next/server";
 import storeOperations from "@/lib/store";

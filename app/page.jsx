@@ -9,17 +9,23 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const [userId] = useState(`user-${Date.now()}`);
+  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    // Store userId in localStorage for use across the app
-    localStorage.setItem("userId", userId);
+    // Check localStorage first
+    const existingUserId = localStorage.getItem("userId");
+    if (existingUserId) {
+      setUserId(existingUserId);
+    } else {
+      const newUserId = `user-${Date.now()}`;
+      localStorage.setItem("userId", newUserId);
+      setUserId(newUserId);
+    }
 
-    // Fetch products when the component mounts
     fetchProducts();
-  }, [userId]);
+  }, []); // Remove userId from dependencies
 
   const fetchProducts = async () => {
     try {
